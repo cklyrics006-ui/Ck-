@@ -1,0 +1,459 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Music Hub</title>
+
+<style>
+body { font-family: Arial, sans-serif; margin: 0; background:#f2f2f2; }
+  .top-image {
+  width: 100%;
+  height: auto;
+  display: block;
+}
+
+header { background:#ddd; padding:15px; text-align:center; }
+  
+.search-bar { display:flex; justify-content:center; margin:10px; }
+.search-bar input { width:60%; padding:10px; }
+
+nav {
+  background:#6b4423;
+  color:white;
+  display:flex;
+  justify-content:space-around;
+  padding:10px;
+}
+nav div { cursor:pointer; }
+
+.categories {
+  background:black;
+  color:white;
+  padding:10px;
+  display:flex;
+  justify-content:center;
+  gap:15px;
+}
+
+.section-title { text-align:center; color:red; margin:20px 0; }
+
+.grid {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr); /* 2 per row */
+  gap: 15px;
+  padding: 10px;
+}
+
+.card {
+  background:white;
+  padding:10px;
+  border-radius:8px;
+  text-align:center;
+}
+
+.thumbnail {
+  position: relative;
+}
+
+.thumbnail img {
+  width: 100%;
+  height: 150px;
+  object-fit: cover;
+  border-radius: 10px;
+}
+
+.play-btn {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  background: red;
+  width: 50px;
+  height: 50px;
+  border-radius: 50%;
+  color: white;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 20px;
+}
+  
+.play-btn {
+  position:absolute;
+  top:50%; left:50%;
+  transform:translate(-50%,-50%);
+  background:red;
+  color:white;
+  border-radius:50%;
+  width:50px; height:50px;
+  display:flex;
+  align-items:center;
+  justify-content:center;
+  font-size:20px;
+  cursor:pointer;
+}
+
+.download {
+  display:block;
+  margin-top:8px;
+  padding:5px;
+  background:green;
+  color:white;
+  text-decoration:none;
+  border-radius:5px;
+}
+
+.back-btn {
+  margin:10px;
+  padding:8px;
+  background:black;
+  color:white;
+  display:inline-block;
+  cursor:pointer;
+}
+
+footer {
+  text-align:center;
+  padding:15px;
+  background:#222;
+  color:white;
+}
+
+/* PLAYER */
+#player {
+.music-player {
+  position: fixed;
+  bottom: 10px;
+  left: 10px;
+  width: 300px;
+}
+</style>
+</head>
+
+<body>
+  
+<header>
+  <img src="fix.jpg" alt="Logo" class="top-image">
+<h2 class="section-title" style="color: black;">
+  Source Of Ugandan Music
+</h2>
+<div class="search-bar">
+  <input id="searchInput" placeholder="Search..." onkeyup="searchSong()">
+</div>
+
+<!-- NAV -->
+<nav>
+  <div onclick="goHome()">HOME</div>
+  <div onclick="showArtists()">ARTISTS</div>
+  <div>MUSIC</div>
+  <div>VIDEOS</div>
+  <div>TOP 10</div>
+</nav>
+
+<div class="categories">
+  <div>Afrobeats</div>
+  <div>Dancehall</div>
+  <div>Gospel</div>
+</div>
+
+<!-- ================= HOME ================= -->
+<div id="home">
+
+<h2 class="section-title">NEW SONGS</h2>
+
+<div class="grid">
+
+  <div class="card">
+    <div class="thumbnail">
+      <img src="twisky.jpg">
+      <div class="play-btn" onclick="toggleSong('song1', this)">▶</div>
+    </div>
+    <p>Problem - twisky fingaz</p>
+    <a class="download" href="Problem.mp3" download>Download</a>
+  </div>
+
+  <div class="card">
+    <div class="thumbnail">
+      <img src="karole_kasita.jpg">
+      <div class="play-btn" onclick="toggleSong('song2', this)">▶</div>
+    </div>
+    <p>Don't - Karole</p>
+    <a class="download" href="Dont.mp3" download>Download</a>
+  </div>
+
+  <div class="card">
+    <div class="thumbnail">
+      <img src="nandor_love.jpg">
+      <div class="play-btn" onclick="toggleSong('song3', this)">▶</div>
+    </div>
+    <p>Mama - Nandor</p>
+    <a class="download" href="Mama.mp3" download>Download</a>
+  </div>
+
+   <div class="card">
+    <div class="thumbnail">
+      <img src="kunsi.jpg">
+      <div class="play-btn" onclick="toggleSong('song4', this)">▶</div>
+    </div>
+    <p>Kunsi - Ota</p>
+    <a class="download" href="kunsi.mp3" download>Download</a>
+  </div>
+  
+</div>
+
+</div>
+
+  <!-- ================= ARTISTS ================= -->
+<style>
+.card {
+  width: 150px;
+}
+
+.card img {
+  width: 100%;
+  height: 200px;
+  object-fit: cover;
+  border-radius: 10px;
+}
+</style>
+  
+<div id="artists" style="display:none;">
+  <h2 class="section-title">Artists</h2>
+
+  <div class="grid">
+
+    <div class="card" onclick="openArtist('karole')">
+      <div class="thumbnail">
+        <img src="KaroleKasita.jpg">
+        <div class="play-btn">▶</div>
+      </div>
+      <p>Karole Kasita</p>
+    </div>
+
+    <div class="card" onclick="openArtist('nandor')">
+      <div class="thumbnail">
+        <img src="nandor_love1.jpg">
+        <div class="play-btn">▶</div>
+      </div>
+      <p>Nandor Love</p>
+    </div>
+
+    <div class="card" onclick="openArtist('twisky')">
+      <div class="thumbnail">
+        <img src="twisky.jpg">
+        <div class="play-btn">▶</div>
+      </div>
+      <p>twisky fingaz</p>
+    </div>
+
+    <div class="card" onclick="openArtist('john')">
+      <div class="thumbnail">
+        <img src="john.jpg">
+        <div class="play-btn">▶</div>
+      </div>
+      <p>John Blaq</p>
+    </div>
+
+    <div class="card" onclick="openArtist('vyroota')">
+      <div class="thumbnail">
+        <img src="vyroaota.jpg">
+        <div class="play-btn">▶</div>
+      </div>
+      <p>Ota</p>
+    </div>
+
+    <div class="card" onclick="openArtist('vinka')">
+      <div class="thumbnail">
+        <img src="vinka.jpg">
+        <div class="play-btn">▶</div>
+      </div>
+      <p>Vinka</p>
+    </div>
+
+    <div class="card" onclick="openArtist('rema')">
+      <div class="thumbnail">
+        <img src="rema.jpg">
+        <div class="play-btn">▶</div>
+      </div>
+      <p>Rema Namakula</p>
+    </div>
+
+    <div class="card" onclick="openArtist('pawa')">
+      <div class="thumbnail">
+        <img src="pawa.jpg">
+        <div class="play-btn">▶</div>
+      </div>
+      <p>Pawa Boy AB</p>
+    </div>
+
+  </div>
+</div>
+
+<!-- ================= ARTIST PAGES ================= -->
+<div id="karole" style="display:none;">
+  <div class="back-btn" onclick="showArtists()">← Back</div>
+  <h2 class="section-title">Karole Kasita</h2>
+
+  <div class="grid">
+    <div class="card">
+      <div class="thumbnail">
+        <img src="karole_kasita.jpg">
+        <div class="play-btn" onclick="toggleSong('song2', this)">▶</div>
+      </div>
+      <p>Don't - Karole kasita</p>
+      <a class="download" href="Dont.mp3" download>Download</a>
+    </div>
+  </div>
+</div>
+
+<div id="nandor" style="display:none;">
+  <div class="back-btn" onclick="showArtists()">← Back</div>
+  <h2 class="section-title">Nandor Love</h2>
+
+  <div class="grid">
+    <div class="card">
+      <div class="thumbnail">
+        <img src="nandor_love.jpg">
+        <div class="play-btn" onclick="toggleSong('song3', this)">▶</div>
+      </div>
+      <p>Mama - Nandor love</p>
+      <a class="download" href="Mama.mp3" download>Download</a>
+    </div>
+  </div>
+</div>
+
+<div id="twisky" style="display:none;">
+  <div class="back-btn" onclick="showArtists()">← Back</div>
+  <h2 class="section-title">Twisky</h2>
+
+  <div class="grid">
+    <div class="card">
+      <div class="thumbnail">
+        <img src="twisky.jpg">
+        <div class="play-btn" onclick="toggleSong('song1', this)">▶</div>
+      </div>
+      <p>Problem - Twisky</p>
+      <a class="download" href="Problem.mp3" download>Download</a>
+    </div>
+  </div>
+</div>
+  
+   <div id="vyroota" style="display:none;">
+  <div class="back-btn" onclick="showArtists()">← Back</div>
+
+  <h2 class="section-title">Vyroota</h2>
+
+  <div class="grid">
+    <div class="card">
+      <div class="thumbnail">
+        <img src="kunsi.jpg">
+        <div class="play-btn" onclick="toggleSong('song4')">▶</div>
+      </div>
+      <p>Kunsi - vyrooya</p>
+      <a class="download" href="kunsi.mp3" download>Download</a>
+    </div>
+  </div>
+ </div>
+   
+  </div>
+</div>
+  
+<!-- AUDIO -->
+<audio id="song1" src="Problem.mp3"></audio>
+<audio id="song2" src="Dont.mp3"></audio>
+<audio id="song3" src="Mama.mp3"></audio>
+<audio id="song4" src="kunsi.mp3"></audio>
+  
+<!-- PLAYER -->
+<div id="player">
+  <p id="nowPlaying">Now Playing</p>
+  <input type="range" id="progress" value="0">
+  <div style="display:flex; justify-content:space-between;">
+    <span id="currentTime">0:00</span>
+    <span id="duration">0:00</span>
+  </div>
+</div>
+
+<footer>
+  <p>© 2026 Music Hub</p>
+</footer>
+
+<script>
+let currentAudio = null;
+let currentBtn = null;
+
+function goHome() {
+  document.getElementById("home").style.display = "block";
+  document.getElementById("artists").style.display = "none";
+  document.querySelectorAll("#karole,#nandor,#twisky").forEach(s => s.style.display="none");
+}
+
+function showArtists() {
+  document.getElementById("home").style.display = "none";
+  document.getElementById("artists").style.display = "block";
+  document.querySelectorAll("#karole,#nandor,#twisky").forEach(s => s.style.display="none");
+}
+
+function openArtist(name) {
+  document.getElementById("home").style.display = "none";
+  document.getElementById("artists").style.display = "none";
+  document.querySelectorAll("#karole,#nandor,#twisky").forEach(s => s.style.display="none");
+  document.getElementById(name).style.display = "block";
+}
+
+function searchSong() {
+  let input = document.getElementById("searchInput").value.toLowerCase();
+  document.querySelectorAll(".card").forEach(card => {
+    card.style.display = card.innerText.toLowerCase().includes(input) ? "block" : "none";
+  });
+}
+
+function toggleSong(id, btn) {
+  let audio = document.getElementById(id);
+
+  if (currentAudio && currentAudio !== audio) {
+    currentAudio.pause();
+    currentAudio.currentTime = 0;
+    if (currentBtn) currentBtn.innerHTML = "▶";
+  }
+
+  if (audio.paused) {
+    audio.play();
+    btn.innerHTML = "⏸";
+    currentAudio = audio;
+    currentBtn = btn;
+
+    document.getElementById("player").style.display = "block";
+    document.getElementById("nowPlaying").innerText =
+      "Now Playing: " + btn.parentElement.parentElement.querySelector("p").innerText;
+  } else {
+    audio.pause();
+    btn.innerHTML = "▶";
+  }
+
+  audio.ontimeupdate = () => {
+    let progress = document.getElementById("progress");
+    progress.value = (audio.currentTime / audio.duration) * 100 || 0;
+
+    document.getElementById("currentTime").innerText = formatTime(audio.currentTime);
+    document.getElementById("duration").innerText = formatTime(audio.duration);
+  };
+}
+
+document.getElementById("progress").addEventListener("input", function() {
+  if (currentAudio) {
+    currentAudio.currentTime = (this.value / 100) * currentAudio.duration;
+  }
+});
+
+function formatTime(time) {
+  if (!time) return "0:00";
+  let m = Math.floor(time / 60);
+  let s = Math.floor(time % 60);
+  return m + ":" + (s < 10 ? "0" : "") + s;
+}
+</script>
+
+</body>
+</html>
